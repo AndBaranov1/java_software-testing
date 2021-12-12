@@ -54,9 +54,9 @@ public class ContactCreationTests {
   }
 
   private void submitConactForm() {
-    wd.findElement(By.name("new_group")).click();
-    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("test_group");
-    wd.findElement(By.xpath("//div[@id='content']/form/select[5]/option[2]")).click();
+    //wd.findElement(By.name("new_group")).click();
+    //new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("test_group");
+    //wd.findElement(By.xpath("//div[@id='content']/form/select[5]/option[2]")).click();
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
   }
 
