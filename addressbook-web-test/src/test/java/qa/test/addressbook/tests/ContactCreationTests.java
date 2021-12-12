@@ -33,7 +33,7 @@ public class ContactCreationTests {
   }
 
   @Test
-  public void testGroupCreation() throws Exception {
+  public void testContactCreation() throws Exception {
 
     gotoContactPage();
     fillContactForm(new ContactData("Jekki", "TestJons", "TestYTesting", "GameTestingPro", "Test", "Jon", "Jon"));
