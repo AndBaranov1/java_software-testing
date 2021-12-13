@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import qa.test.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
-  private WebDriver wd;
 
   public ContactHelper(WebDriver wd) {
     super(wd);
