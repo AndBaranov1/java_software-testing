@@ -19,7 +19,11 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void gotoContactPage() {
-    click(By.linkText("add new"));
+    if (isElementPresent(By.tagName("h1"))
+            && wd.findElement(By.tagName("h1")).getText().equals("Edit")
+            && isElementPresent(By.name("new"))) {
+      return;
+    }
   }
 
   public void gotoHomePage() {

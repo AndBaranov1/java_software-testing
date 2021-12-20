@@ -31,7 +31,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("address"), contactData.getAddress());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      new Select(wd.findElement(By.name("new_group"))).selectByIndex(0);
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -57,9 +57,9 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
-  public void createContact(ContactData contactData, boolean b) {
+  public void createContact(ContactData contact) {
     initContactCreation();
-    fillContactForm(new ContactData("Jero", "TestJons", "TestYTesting", "GameTestingPro", "Test", "Jon", "Jon", "test_group"), true);
+    fillContactForm(contact, true);
     submitContactCreation();
     returnToHomePage();
   }
