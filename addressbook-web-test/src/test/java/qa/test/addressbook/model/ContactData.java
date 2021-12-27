@@ -50,23 +50,23 @@ public class ContactData {
     ContactData that = (ContactData) o;
 
     if (id != that.id) return false;
-    if (middlename != null ? !middlename.equals(that.middlename) : that.middlename != null) return false;
-    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+    if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+    return fname != null ? fname.equals(that.fname) : that.fname == null;
   }
 
   @Override
   public int hashCode() {
     int result = id;
-    result = 31 * result + (middlename != null ? middlename.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+    result = 31 * result + (fname != null ? fname.hashCode() : 0);
     return result;
   }
 
   @Override
   public String toString() {
     return "ContactData{" +
-            "middlename='" + middlename + '\'' +
-            ", lastname='" + lastname + '\'' +
+            "lastname='" + lastname + '\'' +
+            ", fname='" + fname + '\'' +
             '}';
   }
 

@@ -56,6 +56,7 @@ public class ContactHelper extends HelperBase {
   public void deleteSelectedContact() {
     click(By.xpath("//input[@value='Delete']"));
     wd.switchTo().alert().accept();
+    wd.findElement(By.cssSelector("div.msgbox"));
   }
   public void initContactCreation() {
     click(By.linkText("add new"));
@@ -82,11 +83,10 @@ public class ContactHelper extends HelperBase {
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));
       int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
-      String firstname = element.getText();
       String lastname = cells.get(1).getText();
-      String middlename = cells.get(2).getText();
-      ContactData contact = new ContactData(id, middlename, lastname, null, null, null,
-              null, null);
+      String fname = cells.get(2).getText();
+      ContactData contact = new ContactData(id, null, lastname, null, null, null,
+              null, fname);
       contacts.add(contact);
     }
     return contacts;
