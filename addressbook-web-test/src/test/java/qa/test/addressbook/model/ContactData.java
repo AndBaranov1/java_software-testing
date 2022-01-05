@@ -12,7 +12,7 @@ public class ContactData {
 
   public ContactData(String middlename, String lastname, String nickname, String title, String company,
                      String address, String fname) {
-    this.id = Integer.MAX_VALUE;
+    this.id = 0;
     this.middlename = middlename;
     this.lastname = lastname;
     this.nickname = nickname;
