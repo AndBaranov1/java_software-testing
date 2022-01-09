@@ -91,4 +91,18 @@ public class ContactHelper extends HelperBase {
     }
     return contacts;
   }
+
+  //Метод перенесен из сценария создания контакта
+  public int findMaxId() {
+    //Сравнение идентификатора. Устанавливаем цикл по всем элементам
+    List<ContactData> after = getContactList();
+    int max = 0;
+    for (ContactData g : after) {
+      if (g.getId() > max) {
+        max = g.getId();
+      }
+    }
+    //Все контакты в сравниваемых списках теперь имеют Id. Сравнивать можно без учета порядка.
+    return max;
+  }
 }
