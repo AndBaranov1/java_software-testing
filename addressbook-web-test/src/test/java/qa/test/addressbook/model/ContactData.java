@@ -1,15 +1,15 @@
 package qa.test.addressbook.model;
 
 public class ContactData {
-  private int id;
-  private final String middlename;
-  private final String lastname;
-  private final String nickname;
-  private final String title;
-  private final String company;
-  private final String address;
-  private final String fname;
-
+  private int id = Integer.MAX_VALUE;
+  private String middlename;
+  private String lastname;
+  private String nickname;
+  private String title;
+  private String company;
+  private String address;
+  private String fname;
+/*
   public ContactData(String middlename, String lastname, String nickname, String title, String company,
                      String address, String fname) {
     this.id = 0;
@@ -34,12 +34,50 @@ public class ContactData {
     this.fname = fname;
   }
 
+ */
+
   public int getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public ContactData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public ContactData withMiddlename(String middlename) {
+    this.middlename = middlename;
+    return this;
+  }
+
+  public ContactData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactData withNickname(String nickname) {
+    this.nickname = nickname;
+    return this;
+  }
+
+  public ContactData withTitle(String title) {
+    this.title = title;
+    return this;
+  }
+
+  public ContactData withCompany(String company) {
+    this.company = company;
+    return this;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactData withFname(String fname) {
+    this.fname = fname;
+    return this;
   }
 
   @Override
