@@ -5,11 +5,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import qa.test.addressbook.model.ContactData;
 import qa.test.addressbook.model.Contacts;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-
-import java.util.List;
-import java.util.Set;
 
 public class ContactDeletionTests extends TestBase {
 

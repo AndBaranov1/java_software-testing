@@ -9,32 +9,6 @@ public class ContactData {
   private String company;
   private String address;
   private String fname;
-/*
-  public ContactData(String middlename, String lastname, String nickname, String title, String company,
-                     String address, String fname) {
-    this.id = 0;
-    this.middlename = middlename;
-    this.lastname = lastname;
-    this.nickname = nickname;
-    this.title = title;
-    this.company = company;
-    this.address = address;
-    this.fname = fname;
-  }
-
-  public ContactData(int id, String middlename, String lastname, String nickname, String title, String company,
-                     String address, String fname) {
-    this.id = id;
-    this.middlename = middlename;
-    this.lastname = lastname;
-    this.nickname = nickname;
-    this.title = title;
-    this.company = company;
-    this.address = address;
-    this.fname = fname;
-  }
-
- */
 
   public int getId() {
     return id;

@@ -6,9 +6,6 @@ import org.testng.annotations.Test;
 import qa.test.addressbook.model.ContactData;
 import qa.test.addressbook.model.Contacts;
 
-import java.util.Comparator;
-import java.util.List;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
@@ -27,7 +24,6 @@ public class ContactModificationTests extends TestBase {
 
   @Test
   public void testContactModification() {
-
     Contacts before = app.contact().all();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withId(modifiedContact.getId())

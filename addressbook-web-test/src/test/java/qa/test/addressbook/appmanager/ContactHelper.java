@@ -3,15 +3,10 @@ package qa.test.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 import qa.test.addressbook.model.ContactData;
 import qa.test.addressbook.model.Contacts;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -59,7 +54,7 @@ public class ContactHelper extends HelperBase {
   public void deleteSelectedContact() {
     click(By.xpath("//input[@value='Delete']"));
     wd.switchTo().alert().accept();
-    //wd.findElement(By.cssSelector("div.msgbox"));
+    wd.findElement(By.cssSelector("div.msgbox"));
   }
 
   public void initContactCreation() {
@@ -123,5 +118,3 @@ public class ContactHelper extends HelperBase {
   }
  */
 }
-
-
