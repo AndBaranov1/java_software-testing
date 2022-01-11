@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import qa.test.addressbook.model.ContactData;
 import qa.test.addressbook.model.Contacts;
+import qa.test.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -65,12 +66,14 @@ public class ContactHelper extends HelperBase {
     initContactCreation();
     fillContactForm(contact);
     submitContactCreation();
+    contactCache = null;
     returnToHomePage();
   }
 
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
     deleteSelectedContact();
+    contactCache = null;
 
   }
 
@@ -79,6 +82,7 @@ public class ContactHelper extends HelperBase {
     initContactModification(contact.getId());
     fillContactForm(contact);
     submitContactModification();
+    contactCache = null;
     returnToHomePage();
   }
 
@@ -90,17 +94,22 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
+  private Contacts contactCache = null;
+
   public Contacts all() {
-    Contacts contacts = new Contacts();
+    if(contactCache != null) {
+      return new Contacts(contactCache);
+    }
+    contactCache = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String lastname = cells.get(1).getText();
       String fname = cells.get(2).getText();
-      contacts.add(new ContactData().withId(id).withLastname(lastname).withFname(fname));
+      contactCache.add(new ContactData().withId(id).withLastname(lastname).withFname(fname));
     }
-    return contacts;
+    return new Contacts(contactCache);
   }
 /*
   //Метод перенесен из сценария создания контакта
