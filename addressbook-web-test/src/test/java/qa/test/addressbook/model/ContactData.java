@@ -9,9 +9,63 @@ public class ContactData {
   private String company;
   private String address;
   private String fname;
+  private String phones;
+  private String phoneHome;
+  private String phoneMobile;
+  private String phoneWork;
+  private String email;
+  private String allPhones;
+  private String allEmails;
+  private String email2;
+  private String email3;
 
   public int getId() {
     return id;
+  }
+
+  public ContactData withPhones(String phones) {
+    this.phones = phones;
+    return this;
+  }
+
+  public ContactData withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
+  public ContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
+  public ContactData withPhoneHome(String phoneHome) {
+    this.phoneHome = phoneHome;
+    return this;
+  }
+
+  public ContactData withPhoneMobile(String phoneMobile) {
+    this.phoneMobile = phoneMobile;
+    return this;
+  }
+
+  public ContactData withPhoneWork(String phoneWork) {
+    this.phoneWork = phoneWork;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
   }
 
   public ContactData withId(int id) {
@@ -82,6 +136,42 @@ public class ContactData {
             '}';
   }
 
+  public String getPhones() {
+    return phones;
+  }
+
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
+  public String getPhoneHome() {
+    return phoneHome;
+  }
+
+  public String getPhoneMobile() {
+    return phoneMobile;
+  }
+
+  public String getPhoneWork() {
+    return phoneWork;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public String getEmail2() {
+    return email2;
+  }
+
+  public String getEmail3() {
+    return email3;
+  }
+
   public String getMiddlename() {
     return middlename;
   }
@@ -109,5 +199,4 @@ public class ContactData {
   public String getFname() {
     return fname;
   }
-
 }
