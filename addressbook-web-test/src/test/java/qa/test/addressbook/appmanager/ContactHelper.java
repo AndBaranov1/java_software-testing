@@ -131,12 +131,13 @@ public class ContactHelper extends HelperBase {
     String email = wd.findElement(By.name("email")).getAttribute("value");
     String email2 = wd.findElement(By.name("email2")).getAttribute("value");
     String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+    String secondphone = wd.findElement(By.name("phone2")).getAttribute("value");
 
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withMiddlename(middlename).withFname(fname)
             .withAddress(address)
             .withPhoneHome(home).withPhoneMobile(mobile).withPhoneWork(work)
-            .withEmail(email).withAddress(address).withEmail2(email2).withEmail3(email3);
+            .withEmail(email).withAddress(address).withEmail2(email2).withEmail3(email3).withSecondphone(secondphone);
   }
 
   private void initContactModificationById(int id) {

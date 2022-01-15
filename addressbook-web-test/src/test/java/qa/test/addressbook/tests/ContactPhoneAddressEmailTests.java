@@ -23,24 +23,26 @@ public class ContactPhoneAddressEmailTests extends  TestBase{
   }
 
   private String mergePhones(ContactData contact) {
-    return Arrays.asList(contact.getPhoneHome(), contact.getPhoneMobile(), contact.getPhoneWork()).stream().filter((s) -> ! s.equals(""))
+    return Arrays.asList(contact.getPhoneHome(), contact.getPhoneMobile(), contact.getPhoneWork(), contact.getSecondphone())
+            .stream().filter((s) -> ! s.equals(""))
             .map(ContactPhoneAddressEmailTests::cleaned).collect(Collectors.joining("\n"));
   }
 
-  public static String cleaned (String phone) {
+  public static String cleaned(String phone) {
     return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
 
   private String mergeAddresses(ContactData contact) {
-    return Arrays.asList(contact.getAddress()).stream().filter((s) -> !s.equals("")).map(ContactPhoneAddressEmailTests::cleanedAddress)
+    return Arrays.asList(contact.getAddress()).stream().filter((s) -> !s.equals(""))
+            .map(ContactPhoneAddressEmailTests::cleanedAddress)
             .collect(Collectors.joining("\n"));
   }
 
   public static String cleanedAddress(String address) {
-    return address.replaceAll("\\s", "");
+    return address.trim().replaceAll(" +", " ");
   }
 
-  private static String mergeEmails(ContactData contact) {
+  private String mergeEmails(ContactData contact) {
     return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
             .stream().filter((s) -> !s.equals(""))
             .map(ContactPhoneAddressEmailTests::cleanedEmail)
@@ -48,6 +50,6 @@ public class ContactPhoneAddressEmailTests extends  TestBase{
   }
 
   public static String cleanedEmail(String email) {
-    return email.replaceAll("\\s", "");
+    return email.trim().replaceAll(" +", " ");
   }
 }

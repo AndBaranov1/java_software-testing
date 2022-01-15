@@ -18,6 +18,13 @@ public class ContactData {
   private String allEmails;
   private String email2;
   private String email3;
+  private String secondphone;
+
+
+  public ContactData withSecondphone(String secondphone) {
+    this.secondphone = secondphone;
+    return this;
+  }
 
   public int getId() {
     return id;
@@ -138,6 +145,10 @@ public class ContactData {
 
   public String getPhones() {
     return phones;
+  }
+
+  public String getSecondphone() {
+    return secondphone;
   }
 
   public String getAllPhones() {
