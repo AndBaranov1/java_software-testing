@@ -3,6 +3,8 @@ package qa.test.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import qa.test.addressbook.model.ContactData;
 import qa.test.addressbook.model.Contacts;
 
@@ -22,7 +24,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void fillContactForm(ContactData contactData) {
+  public void fillContactForm(ContactData contactData, boolean creation) {
     type(By.name("middlename"), contactData.getMiddlename());
     type(By.name("firstname"), contactData.getFname());
     type(By.name("lastname"), contactData.getLastname());
@@ -30,18 +32,18 @@ public class ContactHelper extends HelperBase {
     type(By.name("title"), contactData.getTitle());
     type(By.name("company"), contactData.getCompany());
     type(By.name("address"), contactData.getAddress());
-
     type(By.name("home"),contactData.getPhoneHome());
     type(By.name("mobile"),contactData.getPhoneMobile());
     type(By.name("work"),contactData.getPhoneWork());
     type(By.name("email"),contactData.getEmail());
-/*
+    attach(By.name("photo"), contactData.getPhoto());
+
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByIndex(0);
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
- */
+
   }
 
   public void submitContactModification() {
@@ -68,7 +70,7 @@ public class ContactHelper extends HelperBase {
 
   public void create(ContactData contact) {
     initContactCreation();
-    fillContactForm(contact);
+    fillContactForm(contact, true);
     submitContactCreation();
     contactCache = null;
     returnToHomePage();
@@ -84,7 +86,7 @@ public class ContactHelper extends HelperBase {
   public void modify(ContactData contact) {
     selectContactById(contact.getId());
     initContactModificationById(contact.getId());
-    fillContactForm(contact);
+    fillContactForm(contact, false);
     submitContactModification();
     contactCache = null;
     returnToHomePage();
