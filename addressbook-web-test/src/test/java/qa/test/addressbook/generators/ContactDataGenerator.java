@@ -37,7 +37,7 @@ public class ContactDataGenerator {
     }
     generator.run();
   }
-  
+
   private void save(List<ContactData> contacts, File file) throws IOException {
     System.out.println(new File(".").getAbsolutePath());
     Writer writer = new FileWriter(file);
