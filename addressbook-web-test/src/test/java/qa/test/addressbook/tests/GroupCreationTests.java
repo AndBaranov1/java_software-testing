@@ -1,6 +1,7 @@
 package qa.test.addressbook.tests;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.DataProvider;
@@ -46,7 +47,7 @@ public class GroupCreationTests extends TestBase {
         json += line;
         line = reader.readLine();
       }
-      Gson gson = new Gson();
+      Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
       List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType());
       return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }

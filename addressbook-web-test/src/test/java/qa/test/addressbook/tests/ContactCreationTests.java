@@ -1,6 +1,7 @@
 package qa.test.addressbook.tests;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import org.openqa.selenium.json.TypeToken;
 import org.testng.Assert;
@@ -51,7 +52,7 @@ public class ContactCreationTests extends TestBase {
         json += line;
         line = reader.readLine();
       }
-      Gson gson = new Gson();
+      Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
       List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType());
       return contacts.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
     }
