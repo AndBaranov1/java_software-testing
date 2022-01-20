@@ -1,6 +1,6 @@
 [
   {
-    "middlename": "test 0",
+    "middlename": "middlename 0",
     "lastname": "lastname 0",
     "nickname": "nickname 0",
     "address": "address 0",
@@ -9,7 +9,7 @@
     "email": "email 0"
   },
   {
-    "middlename": "test 1",
+    "middlename": "middlename 1",
     "lastname": "lastname 1",
     "nickname": "nickname 1",
     "address": "address 1",
@@ -18,7 +18,7 @@
     "email": "email 1"
   },
   {
-    "middlename": "test 2",
+    "middlename": "middlename 2",
     "lastname": "lastname 2",
     "nickname": "nickname 2",
     "address": "address 2",
