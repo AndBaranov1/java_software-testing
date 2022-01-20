@@ -16,20 +16,35 @@ public class ContactData {
   private String lastname;
   @Expose
   private String nickname;
+  @Expose
   private String title;
+  @Expose
   private String company;
+  @Expose
   private String address;
+  @Expose
   private String fname;
+  @Expose
   private String phones;
+  @Expose
   private String phoneHome;
+  @Expose
   private String phoneMobile;
+  @Expose
   private String phoneWork;
+  @Expose
   private String email;
+  @Expose
   private String allPhones;
+  @Expose
   private String allEmails;
+  @Expose
   private String email2;
+  @Expose
   private String email3;
+  @Expose
   private String secondphone;
+  @Expose
   private File photo;
 
   public File getPhoto() {
@@ -158,8 +173,8 @@ public class ContactData {
   @Override
   public String toString() {
     return "ContactData{" +
-            "lastname='" + lastname + '\'' +
-            ", fname='" + fname + '\'' +
+            "middlename='" + middlename + '\'' +
+            ", lastname='" + lastname + '\'' +
             '}';
   }
 

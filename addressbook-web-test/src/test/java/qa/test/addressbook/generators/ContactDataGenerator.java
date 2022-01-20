@@ -23,7 +23,7 @@ public class ContactDataGenerator {
   @Parameter(names = "-f", description = "Target file")
   public String file;
 
-  @Parameter(names = "-d", description = "Contact format")
+  @Parameter(names = "-d", description = "Data format")
   public String format;
 
   private void run() throws IOException {
@@ -71,8 +71,8 @@ public class ContactDataGenerator {
     System.out.println(new File(".").getAbsolutePath());
     try (Writer writer = new FileWriter(file)) {
       for (ContactData contact : contacts) {
-        writer.write(String.format("%s;%s;%s;%s;%s;%s;%s\n", contact.getMiddlename(), contact.getAddress(), contact.getLastname(), contact.getPhoneHome(),
-                contact.getNickname(), contact.getPhoneMobile(), contact.getEmail()));
+        writer.write(String.format("%s;%s;%s;%s;%s;%s;%s\n", contact.getMiddlename(), contact.getLastname(),
+                contact.getAddress(), contact.getPhoneHome(), contact.getNickname(), contact.getPhoneMobile(), contact.getEmail()));
       }
     }
   }
@@ -80,8 +80,9 @@ public class ContactDataGenerator {
   private List<ContactData> generateContact(int count) {
     List<ContactData> contacts = new ArrayList<ContactData>();
     for (int i = 0; i < count; i++) {
-      contacts.add(new ContactData().withMiddlename(String.format("test %s", i)).withLastname(String.format("lastname %s", i))
-              .withAddress(String.format("address %s", i)).withPhoneHome(String.format("99955522 %s", i)).withNickname(String.format("nickname %s", i))
+      contacts.add(new ContactData().withMiddlename(String.format("test %s", i))
+              .withLastname(String.format("lastname %s", i)).withAddress(String.format("address %s", i))
+              .withPhoneHome(String.format("phone %s", i)).withNickname(String.format("nickname %s", i))
               .withPhoneMobile(String.format("mobile %s", i)).withEmail(String.format("email %s", i)));
     }
     return contacts;

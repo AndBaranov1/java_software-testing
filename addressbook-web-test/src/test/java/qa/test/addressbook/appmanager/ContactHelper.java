@@ -31,16 +31,17 @@ public class ContactHelper extends HelperBase {
   public void fillContactForm(ContactData contactData) {
     type(By.name("middlename"), contactData.getMiddlename());
     type(By.name("firstname"), contactData.getFname());
+    type(By.name("address"), contactData.getAddress());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("nickname"), contactData.getNickname());
     type(By.name("title"), contactData.getTitle());
     type(By.name("company"), contactData.getCompany());
-    type(By.name("address"), contactData.getAddress());
     type(By.name("home"),contactData.getPhoneHome());
     type(By.name("mobile"),contactData.getPhoneMobile());
     type(By.name("work"),contactData.getPhoneWork());
     type(By.name("email"),contactData.getEmail());
     attach(By.name("photo"), contactData.getPhoto());
+
 /*
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByIndex(0);
@@ -118,10 +119,10 @@ public class ContactHelper extends HelperBase {
       String lastname = cells.get(1).getText();
       String fname = cells.get(2).getText();
       String address = cells.get(3).getText();
-      String allPhones = cells.get(5).getText();
       String allEmails = cells.get(4).getText();
+      String allPhones = cells.get(5).getText();
       contactCache.add(new ContactData().withId(id).withLastname(lastname).withFname(fname)
-              .withAllPhones(allPhones).withAddress(address).withAllEmails(allEmails));
+              .withAddress(address).withAllPhones(allPhones).withAllEmails(allEmails));
     }
     return new Contacts(contactCache);
   }
@@ -140,14 +141,17 @@ public class ContactHelper extends HelperBase {
     String secondphone = wd.findElement(By.name("phone2")).getAttribute("value");
 
     wd.navigate().back();
-    return new ContactData().withId(contact.getId()).withMiddlename(middlename).withFname(fname)
-            .withAddress(address)
-            .withPhoneHome(home).withPhoneMobile(mobile).withPhoneWork(work)
-            .withEmail(email).withAddress(address).withEmail2(email2).withEmail3(email3).withSecondphone(secondphone);
+    return new ContactData().withId(contact.getId()).withMiddlename(middlename)
+            .withFname(fname).withAddress(address).withPhoneHome(home).withPhoneMobile(mobile).withPhoneWork(work)
+            .withEmail(email).withEmail2(email2).withEmail3(email3).withSecondphone(secondphone);
   }
 
   private void initContactModificationById(int id) {
     wd.findElement(By.xpath("//a[@href='edit.php?id=" + id + "']")).click();
+  }
+
+  public int count() {
+    return wd.findElements(By.name("selected[]")).size();
   }
 /*
   //Метод перенесен из сценария создания контакта

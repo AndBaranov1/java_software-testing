@@ -4,7 +4,7 @@
     <lastname>lastname 0</lastname>
     <nickname>nickname 0</nickname>
     <address>address 0</address>
-    <phoneHome>99955522 0</phoneHome>
+    <phoneHome>phone 0</phoneHome>
     <phoneMobile>mobile 0</phoneMobile>
     <email>email 0</email>
   </contact>
@@ -13,7 +13,7 @@
     <lastname>lastname 1</lastname>
     <nickname>nickname 1</nickname>
     <address>address 1</address>
-    <phoneHome>99955522 1</phoneHome>
+    <phoneHome>phone 1</phoneHome>
     <phoneMobile>mobile 1</phoneMobile>
     <email>email 1</email>
   </contact>
@@ -22,7 +22,7 @@
     <lastname>lastname 2</lastname>
     <nickname>nickname 2</nickname>
     <address>address 2</address>
-    <phoneHome>99955522 2</phoneHome>
+    <phoneHome>phone 2</phoneHome>
     <phoneMobile>mobile 2</phoneMobile>
     <email>email 2</email>
   </contact>
