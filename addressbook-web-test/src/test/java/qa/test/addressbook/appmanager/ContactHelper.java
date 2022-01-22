@@ -8,6 +8,7 @@ import org.testng.Assert;
 import qa.test.addressbook.model.ContactData;
 import qa.test.addressbook.model.Contacts;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -40,7 +41,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("mobile"),contactData.getPhoneMobile());
     type(By.name("work"),contactData.getPhoneWork());
     type(By.name("email"),contactData.getEmail());
-    attach(By.name("photo"), contactData.getPhoto());
+    //attach(By.name("photo"), contactData.getPhoto());
 
 /*
     if (creation) {
@@ -48,7 +49,9 @@ public class ContactHelper extends HelperBase {
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
-*/
+
+ */
+
   }
 
   public void submitContactModification() {
@@ -105,6 +108,24 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
+  public List<ContactData> list() {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> elements = wd.findElements(By.xpath("//tr[@name = 'entry']"));
+    for (WebElement element : elements){
+      List<WebElement> cells = element.findElements(By.xpath(".//td"));
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      String fname = cells.get(2).getText();
+      String lastname = cells.get(1).getText();
+      String address = cells.get(3).getText();
+      String phoneMobile = element.findElement(By.xpath("//td[6]")).getText();
+      String email = element.findElement(By.tagName("a")).getText();
+      contacts.add(new ContactData().withId(id).withLastname(lastname).withFname(fname).withAddress(address)
+              .withPhoneMobile(phoneMobile).withEmail(email));
+    }
+    return  contacts;
+  }
+
+
   private Contacts contactCache = null;
 
   public Contacts all() {
@@ -122,7 +143,7 @@ public class ContactHelper extends HelperBase {
       String allEmails = cells.get(4).getText();
       String allPhones = cells.get(5).getText();
       contactCache.add(new ContactData().withId(id).withLastname(lastname).withFname(fname)
-              .withAddress(address).withAllPhones(allPhones).withAllEmails(allEmails));
+              .withAddress(address).withAllEmails(allEmails).withAllPhones(allPhones));
     }
     return new Contacts(contactCache);
   }

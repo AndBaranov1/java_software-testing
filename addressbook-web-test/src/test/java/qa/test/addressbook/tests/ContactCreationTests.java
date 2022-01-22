@@ -59,15 +59,15 @@ public class ContactCreationTests extends TestBase {
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) {
     app.goTo().ContactPage();
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
    // ContactData contact = new ContactData().withMiddlename("Jero").withLastname("TestJons")
            // .withNickname("TestYTesting").withTitle("GameTestingPro").withCompany("Test").withAddress("Jon").withFname("Jon")
          //   .withEmail("1testemail@mail.ru").withAddress("test_address").withPhoneHome("1111").withPhoneMobile("799955522")
           //  .withPhoneWork("8888555").withPhoto(photo);
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
-    Assert.assertEquals(after.size(), before.size() + 1);
+    Contacts after = app.db().contacts();
+    //Assert.assertEquals(after.size(), before.size() + 1);
     //contact.withId(app.contact().findMaxId());
 /*
     contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
