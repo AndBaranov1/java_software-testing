@@ -30,7 +30,7 @@ public class NavigationHelper extends HelperBase {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
-    click(By.xpath("//a[contains(text(),'home')]"));
+    click(By.linkText("home"));
   }
 
   public void ContactMDPage() {

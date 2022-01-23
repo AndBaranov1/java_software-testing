@@ -96,7 +96,7 @@ public class ContactCreationTests extends TestBase {
   public void testContactInGroups(){
     Groups groups = app.db().groups();
     File photo = new File("src/test/resources/stru.png");
-    ContactData newContact = new ContactData().withFname("test_name").withLastname("test_surename").withPhoto(photo)
+    ContactData newContact = new ContactData().withFname("fname").withLastname("lastname").withPhoto(photo)
             .inGroup(groups.iterator().next());
     app.goTo().homePage();
     app.contact().initContactCreation();
