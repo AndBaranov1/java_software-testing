@@ -8,6 +8,7 @@ dependencies {
     implementation 'org.testng:testng:7.4.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.1.0'
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
 
 }
 test {
@@ -20,7 +21,7 @@ test {
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if (project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${groupsVerifyUI}"
+    if (project.hasProperty('groupsVerifyUI')) {
+        systemProperty 'groupsVerifyUI', "${groupsVerifyUI}"
     }
 }
