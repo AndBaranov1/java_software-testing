@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import qa.test.addressbook.model.ContactData;
 import qa.test.addressbook.model.Contacts;
+import qa.test.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void fillContactForm(ContactData contactData) {
+  public void fillContactForm(ContactData contactData, boolean creation) {
     type(By.name("middlename"), contactData.getMiddlename());
     type(By.name("firstname"), contactData.getFname());
     type(By.name("address"), contactData.getAddress());
@@ -41,17 +42,17 @@ public class ContactHelper extends HelperBase {
     type(By.name("mobile"),contactData.getPhoneMobile());
     type(By.name("work"),contactData.getPhoneWork());
     type(By.name("email"),contactData.getEmail());
-    //attach(By.name("photo"), contactData.getPhoto());
+    attach(By.name("photo"), contactData.getPhoto());
 
-/*
+
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByIndex(0);
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
-
- */
-
   }
 
   public void submitContactModification() {
@@ -78,7 +79,7 @@ public class ContactHelper extends HelperBase {
 
   public void create(ContactData contact) {
     initContactCreation();
-    fillContactForm(contact);
+    fillContactForm(contact, true);
     submitContactCreation();
     contactCache = null;
     returnToHomePage();
@@ -94,7 +95,7 @@ public class ContactHelper extends HelperBase {
   public void modify(ContactData contact) {
     selectContactById(contact.getId());
     initContactModificationById(contact.getId());
-    fillContactForm(contact);
+    fillContactForm(contact, false);
     submitContactModification();
     contactCache = null;
     returnToHomePage();
@@ -174,6 +175,61 @@ public class ContactHelper extends HelperBase {
   public int count() {
     return wd.findElements(By.name("selected[]")).size();
   }
+
+  public void ContactInGroup(ContactData contact) {
+    initContactCheckbox(contact.getId());
+    contactCache = null;
+    returnToHomePage();
+  }
+  public void initContactCheckbox(int id) {
+    wd.findElement(By.xpath("//input[@id="+ id +"]")).click();
+    wd.findElement(By.xpath("//input[@value='Add to']")).click();
+  }
+  public void deleteContactGroup(ContactData contact, GroupData group){
+    ContactDeletedGroup(group);
+    selectContactById(contact.getId());
+    initContactDelete();
+  }
+
+  public void addContactInGroup(ContactData contact, GroupData group) {
+    selectContactById(contact.getId());
+    selectGroupInList(group.getName());
+    initAddToGroup();
+  }
+
+  private void selectGroupInList(String groupName) {
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(groupName);
+  }
+  private void initAddToGroup() {
+    wd.findElement(By.name("add")).click();
+  }
+
+  public void ContactDeletedGroup(GroupData group) {
+    new Select(wd.findElement(By.xpath("//select[@name='group']"))).selectByValue(String.valueOf(group.getId()));
+  }
+  public void initContactDelete(){
+    wd.findElement(By.xpath("//input[@name='remove']")).click();
+  }
+
+  public void DellContactForm(ContactData contactData, boolean creation) {
+    type(By.name("firstname"), contactData.getFname());
+    type(By.name("lastname"), contactData.getLastname());
+    type(By.name("address"), contactData.getAddress());
+    type(By.name("mobile"), contactData.getPhoneMobile());
+    type(By.name("email"), contactData.getEmail());
+    attach(By.name("photo"), contactData.getPhoto());
+
+    if (creation) {
+      if (contactData.getGroups().size() > 0){
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("group"))).
+                selectByValue(contactData.getGroups().iterator().next().getName());
+      }
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("group")));
+    }
+  }
+
 /*
   //Метод перенесен из сценария создания контакта
   public int findMaxId() {

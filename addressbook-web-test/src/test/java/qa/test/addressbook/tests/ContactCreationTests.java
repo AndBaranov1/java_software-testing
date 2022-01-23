@@ -5,10 +5,13 @@ import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import org.openqa.selenium.json.TypeToken;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import qa.test.addressbook.model.ContactData;
 import qa.test.addressbook.model.Contacts;
+import qa.test.addressbook.model.GroupData;
+import qa.test.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -56,15 +59,26 @@ public class ContactCreationTests extends TestBase {
     }
   }
 
+  @BeforeMethod
+  public void ensurePreconditions() {
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("test1"));
+    }
+  }
+
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) {
+    Groups groups = app.db().groups();
+    app.goTo().homePage();
     app.goTo().ContactPage();
     Contacts before = app.db().contacts();
+    app.contact().create(contact.inGroup(groups.iterator().next()));
    // ContactData contact = new ContactData().withMiddlename("Jero").withLastname("TestJons")
            // .withNickname("TestYTesting").withTitle("GameTestingPro").withCompany("Test").withAddress("Jon").withFname("Jon")
          //   .withEmail("1testemail@mail.ru").withAddress("test_address").withPhoneHome("1111").withPhoneMobile("799955522")
           //  .withPhoneWork("8888555").withPhoto(photo);
-    app.contact().create(contact);
+    //app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
     //Assert.assertEquals(after.size(), before.size() + 1);
@@ -77,5 +91,17 @@ public class ContactCreationTests extends TestBase {
     assertThat(after, equalTo
             (before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     verifyContactListInUI();
+  }
+  @Test
+  public void testContactInGroups(){
+    Groups groups = app.db().groups();
+    File photo = new File("src/test/resources/stru.png");
+    ContactData newContact = new ContactData().withFname("test_name").withLastname("test_surename").withPhoto(photo)
+            .inGroup(groups.iterator().next());
+    app.goTo().homePage();
+    app.contact().initContactCreation();
+    app.contact().fillContactForm(newContact, true);
+    app.contact().submitContactCreation();
+    app.contact().returnToHomePage();
   }
 }

@@ -32,4 +32,13 @@ public class NavigationHelper extends HelperBase {
     }
     click(By.xpath("//a[contains(text(),'home')]"));
   }
+
+  public void ContactMDPage() {
+    if (isElementPresent(By.tagName("h1"))
+            && wd.findElement(By.tagName("h1")).getText().equals("home")
+            && isElementPresent(By.name("Edit"))){
+      return;
+    }
+    click(By.linkText("home"));
+  }
 }
