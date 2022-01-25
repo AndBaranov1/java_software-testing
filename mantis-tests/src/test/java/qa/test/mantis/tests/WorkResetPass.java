@@ -9,40 +9,37 @@ import ru.lanwen.verbalregex.VerbalExpression;
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.List;
-import static org.testng.Assert.assertTrue;
 
-public class RegistrationTests extends TestBase {
+import static org.testng.AssertJUnit.assertTrue;
+
+public class WorkResetPass extends TestBase {
 
   @BeforeMethod
   public void startMailServer() {
     app.mail().start();
   }
-
   @Test
-  public void testRegistration( ) throws IOException, MessagingException {
+  public void testResetPass() throws IOException, MessagingException {
     long now = System.currentTimeMillis();
-    String user = String.format("user%s", now);
-    String password = "password";
-    String email = String.format("user%s@localhost", now);//
-    app.james().createUser(user, password);//
-    app.registration().start(user, email);
-    //List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
-    List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
+    app.registration().adminEnter(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"));
+    String resUser = app.getProperty("g.User");
+    app.registration().goToUserPage(resUser);
+    app.registration().ResetPassword(resUser);
+    String email = String.format(app.getProperty("g.Email"), now);
+    List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
     String confirmationLink = findConfirmationLink(mailMessages, email);
+    String password = app.getProperty("g.Password");
     app.registration().finish(confirmationLink, password);
-    assertTrue(app.newSession().login(user, password));
+    app.registration().userEnter(resUser, password);
+    assertTrue(app.newSession().login(resUser, password));
   }
-
-
   private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
     MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
     VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
     return regex.getText(mailMessage.text);
   }
-
   @AfterMethod(alwaysRun = true)
   public void stopMailServer() {
     app.mail().stop();
   }
-
 }

@@ -41,17 +41,17 @@ public class DbHelper {
     session.close();
     return new Contacts(result);
   }
-/*
+
   public ContactData getContactFromDb(int id) {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    ContactData single = (ContactData) session.createQuery(String.format("from UserData where id = %s", id)).uniqueResult();
+    ContactData single = (ContactData) session.createQuery(String.format("from ContactData where id = %s", id)).uniqueResult();
     session.getTransaction().commit();
     session.close();
     return single;
   }
 
- */
+
 public GroupData groupByName(String groupName) {
   Session session = sessionFactory.openSession();
   session.beginTransaction();
