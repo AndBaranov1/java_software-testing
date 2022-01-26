@@ -44,7 +44,7 @@ public class ContactsInGroups extends TestBase {
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
   }
 
-  
+
   public GroupData selectedGroup(ContactData user) {
     Groups all = app.db().groups();
     Collection<GroupData> freeGroups = new HashSet<GroupData>(all);
