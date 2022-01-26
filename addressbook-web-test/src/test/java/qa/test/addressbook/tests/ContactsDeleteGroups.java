@@ -42,7 +42,7 @@ public class ContactsDeleteGroups extends TestBase {
     assertThat(after, equalTo(before.without(GroupToAdd)));
   }
 
-  
+
   public GroupData selectGroups(ContactData contact) {
     return contact.getGroups().iterator().next();
   }

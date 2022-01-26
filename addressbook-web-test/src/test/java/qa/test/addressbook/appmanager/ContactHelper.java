@@ -31,10 +31,11 @@ public class ContactHelper extends HelperBase {
   }
 
   public void fillContactForm(ContactData contactData, boolean creation) {
-    type(By.name("middlename"), contactData.getMiddlename());
-    type(By.name("firstname"), contactData.getFname());
-    type(By.name("address"), contactData.getAddress());
+    //type(By.name("middlename"), contactData.getMiddlename());
+    //type(By.name("firstname"), contactData.getFname());
+    //type(By.name("address"), contactData.getAddress());
     type(By.name("lastname"), contactData.getLastname());
+    /*
     type(By.name("nickname"), contactData.getNickname());
     type(By.name("title"), contactData.getTitle());
     type(By.name("company"), contactData.getCompany());
@@ -43,6 +44,8 @@ public class ContactHelper extends HelperBase {
     type(By.name("work"),contactData.getPhoneWork());
     type(By.name("email"),contactData.getEmail());
     attach(By.name("photo"), contactData.getPhoto());
+
+     */
 
 
     if (creation) {
@@ -120,8 +123,8 @@ public class ContactHelper extends HelperBase {
       String address = cells.get(3).getText();
       String phoneMobile = element.findElement(By.xpath("//td[6]")).getText();
       String email = element.findElement(By.tagName("a")).getText();
-      contacts.add(new ContactData().withId(id).withLastname(lastname).withFname(fname).withAddress(address)
-              .withPhoneMobile(phoneMobile).withEmail(email));
+      contacts.add(new ContactData().withId(id).withLastname(lastname));
+              //.withFname(fname).withAddress(address).withPhoneMobile(phoneMobile).withEmail(email));
     }
     return  contacts;
   }
@@ -143,8 +146,8 @@ public class ContactHelper extends HelperBase {
       String address = cells.get(3).getText();
       String allEmails = cells.get(4).getText();
       String allPhones = cells.get(5).getText();
-      contactCache.add(new ContactData().withId(id).withLastname(lastname).withFname(fname)
-              .withAddress(address).withAllEmails(allEmails).withAllPhones(allPhones));
+      contactCache.add(new ContactData().withId(id).withLastname(lastname));
+              //.withFname(fname).withAddress(address).withAllEmails(allEmails).withAllPhones(allPhones));
     }
     return new Contacts(contactCache);
   }
@@ -152,6 +155,7 @@ public class ContactHelper extends HelperBase {
   public ContactData infoFromEditForm(ContactData contact) {
     initContactModificationById(contact.getId());
     String middlename = wd.findElement(By.name("middlename")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
     String fname = wd.findElement(By.name("firstname")).getAttribute("value");
     String address = wd.findElement(By.name("address")).getAttribute("value");
     String home = wd.findElement(By.name("home")).getAttribute("value");
@@ -163,9 +167,9 @@ public class ContactHelper extends HelperBase {
     String secondphone = wd.findElement(By.name("phone2")).getAttribute("value");
 
     wd.navigate().back();
-    return new ContactData().withId(contact.getId()).withMiddlename(middlename)
-            .withFname(fname).withAddress(address).withPhoneHome(home).withPhoneMobile(mobile).withPhoneWork(work)
-            .withEmail(email).withEmail2(email2).withEmail3(email3).withSecondphone(secondphone);
+    return new ContactData().withId(contact.getId()).withMiddlename(lastname);
+            //.withMiddlename(middlename).withFname(fname).withAddress(address).withPhoneHome(home).withPhoneMobile(mobile).withPhoneWork(work)
+            //.withEmail(email).withEmail2(email2).withEmail3(email3).withSecondphone(secondphone);
   }
 
   private void initContactModificationById(int id) {
@@ -212,12 +216,15 @@ public class ContactHelper extends HelperBase {
   }
 
   public void DellContactForm(ContactData contactData, boolean creation) {
-    type(By.name("firstname"), contactData.getFname());
+   // type(By.name("firstname"), contactData.getFname());
     type(By.name("lastname"), contactData.getLastname());
+    /*
     type(By.name("address"), contactData.getAddress());
     type(By.name("mobile"), contactData.getPhoneMobile());
     type(By.name("email"), contactData.getEmail());
     attach(By.name("photo"), contactData.getPhoto());
+
+     */
 
     if (creation) {
       if (contactData.getGroups().size() > 0){
