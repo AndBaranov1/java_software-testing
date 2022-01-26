@@ -11,9 +11,6 @@ import qa.test.addressbook.model.Groups;
 import java.util.Collection;
 import java.util.HashSet;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-
 public class ContactsInGroups extends TestBase {
 
   @BeforeMethod
