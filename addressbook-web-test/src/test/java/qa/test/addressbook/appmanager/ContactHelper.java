@@ -18,7 +18,7 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
 
-  public void returnToHomePage() {
+  public void homePage() {
     //click(By.linkText("home page"));
     if (isElementPresent(By.id("maintable"))) {
       return;
@@ -81,7 +81,7 @@ public class ContactHelper extends HelperBase {
     fillContactForm(contact, true);
     submitContactCreation();
     contactCache = null;
-    returnToHomePage();
+    homePage();
   }
 
   public void delete(ContactData contact) {
@@ -97,7 +97,7 @@ public class ContactHelper extends HelperBase {
     fillContactForm(contact, false);
     submitContactModification();
     contactCache = null;
-    returnToHomePage();
+    homePage();
   }
 
   public boolean isThereAContact() {
@@ -178,7 +178,7 @@ public class ContactHelper extends HelperBase {
   public void ContactInGroup(ContactData contact) {
     initContactCheckbox(contact.getId());
     contactCache = null;
-    returnToHomePage();
+    homePage();
   }
   public void initContactCheckbox(int id) {
     wd.findElement(By.xpath("//input[@id="+ id +"]")).click();
@@ -192,8 +192,11 @@ public class ContactHelper extends HelperBase {
 
   public void addContactInGroup(ContactData contact, GroupData group) {
     selectContactById(contact.getId());
-    selectGroupInList(group.getName());
-    initAddToGroup();
+   // selectGroupInList(group.getName());
+    new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(group.getId()));
+    click(By.name("add"));
+    //initAddToGroup();
+    contactCache = null;
   }
 
   private void selectGroupInList(String groupName) {

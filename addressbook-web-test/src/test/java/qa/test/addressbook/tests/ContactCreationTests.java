@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import org.openqa.selenium.json.TypeToken;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -102,6 +101,6 @@ public class ContactCreationTests extends TestBase {
     app.contact().initContactCreation();
     app.contact().fillContactForm(newContact, true);
     app.contact().submitContactCreation();
-    app.contact().returnToHomePage();
+    app.contact().homePage();
   }
 }
