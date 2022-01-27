@@ -1,29 +1,35 @@
 <list>
   <contact>
-    <middlename>test 0</middlename>
+    <middlename>middlename 0</middlename>
     <lastname>lastname 0</lastname>
     <nickname>nickname 0</nickname>
     <address>address 0</address>
+    <fname>fname 0</fname>
     <phoneHome>phone 0</phoneHome>
     <phoneMobile>mobile 0</phoneMobile>
     <email>email 0</email>
+    <groups/>
   </contact>
   <contact>
-    <middlename>test 1</middlename>
+    <middlename>middlename 1</middlename>
     <lastname>lastname 1</lastname>
     <nickname>nickname 1</nickname>
     <address>address 1</address>
+    <fname>fname 1</fname>
     <phoneHome>phone 1</phoneHome>
     <phoneMobile>mobile 1</phoneMobile>
     <email>email 1</email>
+    <groups/>
   </contact>
   <contact>
-    <middlename>test 2</middlename>
+    <middlename>middlename 2</middlename>
     <lastname>lastname 2</lastname>
     <nickname>nickname 2</nickname>
     <address>address 2</address>
+    <fname>fname 2</fname>
     <phoneHome>phone 2</phoneHome>
     <phoneMobile>mobile 2</phoneMobile>
     <email>email 2</email>
+    <groups/>
   </contact>
 </list>

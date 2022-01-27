@@ -40,10 +40,11 @@ public class DbConnectionTest {
     try {
       conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/addressbook?user=root&password=");
       Statement st = conn.createStatement();
-      ResultSet rs = st.executeQuery("select id, firstname, lastname, address from addressbook");
+      ResultSet rs = st.executeQuery("select id, fname, lastname, address from addressbook");
       Contacts contact = new Contacts();
       while (rs.next()) {
-        contact.add(new ContactData().withId(rs.getInt("id")).withMiddlename(rs.getString("middlename"))
+        contact.add(new ContactData().withId(rs.getInt("id")).withFname(rs.getString("fname"))
+                .withMiddlename(rs.getString("middlename"))
                         .withLastname(rs.getString("lastname")).withAddress(rs.getString("address"))
                 .withPhoneHome(rs.getString("phone")).withNickname(rs.getString("nickname"))
                 .withPhoneMobile(rs.getString("mobile")).withEmail(rs.getString("email")));

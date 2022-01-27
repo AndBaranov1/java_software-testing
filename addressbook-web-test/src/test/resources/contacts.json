@@ -4,26 +4,32 @@
     "lastname": "lastname 0",
     "nickname": "nickname 0",
     "address": "address 0",
+    "fname": "fname 0",
     "phoneHome": "phone 0",
     "phoneMobile": "mobile 0",
-    "email": "email 0"
+    "email": "email 0",
+    "groups": []
   },
   {
     "middlename": "middlename 1",
     "lastname": "lastname 1",
     "nickname": "nickname 1",
     "address": "address 1",
+    "fname": "fname 1",
     "phoneHome": "phone 1",
     "phoneMobile": "mobile 1",
-    "email": "email 1"
+    "email": "email 1",
+    "groups": []
   },
   {
     "middlename": "middlename 2",
     "lastname": "lastname 2",
     "nickname": "nickname 2",
     "address": "address 2",
+    "fname": "fname 2",
     "phoneHome": "phone 2",
     "phoneMobile": "mobile 2",
-    "email": "email 2"
+    "email": "email 2",
+    "groups": []
   }
 ]
