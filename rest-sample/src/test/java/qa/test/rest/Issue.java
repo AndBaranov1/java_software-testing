@@ -57,4 +57,13 @@ public class Issue {
   public String getStateName() {
     return state_name;
   }
+
+  public String getStatus() {
+    return state_name;
+  }
+
+  public Issue withStatus(String state_name) {
+    this.state_name = state_name;
+    return this;
+  }
 }

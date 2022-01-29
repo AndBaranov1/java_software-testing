@@ -15,10 +15,19 @@ import java.util.Set;
 public class TestBase {
 
   public boolean isIssueOpen(int issueId) throws IOException {
-    if ("Resolved".equals(getIssueStatus(issueId)) || ("Closed".equals(getIssueStatus(issueId)))) {
+    String issueById = getExecutor().execute(Request.Get(String.format("https://bugify.stqa.ru/api/issues/%s.json", issueId))).returnContent().asString();
+    JsonElement parsed = new JsonParser().parse(issueById);
+    JsonElement jsonIssues = parsed.getAsJsonObject().get("issues");
+    Set<Issue> setIssues = new Gson().fromJson(jsonIssues, new TypeToken<Set<Issue>>() {
+    }.getType());
+    Issue selectedIssue = setIssues.iterator().next();
+    System.out.println("state_name = " + selectedIssue.getStatus());
+
+    if(selectedIssue.getStatus().equals("Rresolved") || selectedIssue.getStatus().equals("Closed")) {
       return false;
+    } else {
+      return true;
     }
-    return true;
   }
 
   public void skipIfNotFixed(int issueId) throws IOException {
@@ -40,4 +49,6 @@ public class TestBase {
     }.getType());
     return issueParams.iterator().next().getStateName();
   }
+
+
 }

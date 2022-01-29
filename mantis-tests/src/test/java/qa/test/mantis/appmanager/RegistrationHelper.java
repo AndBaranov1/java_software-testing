@@ -22,12 +22,7 @@ public class RegistrationHelper extends HelperBase {
     type(By.name("password_confirm"), password);
     click(By.cssSelector("input[value='Изменить учетную запись']"));
   }
-  public void adminEnter(String username, String password) {
-    wd.get(app.getProperty("web.baseUrl") + "/login_page.php");
-    type(By.name("username"), username);
-    type(By.name("password"), password);
-    click(By.cssSelector("input[value='Войти']"));
-  }
+
   public void userEnter(String username, String password) {
     wd.get(app.getProperty("web.baseUrl") + "/login_page.php");
     type(By.name("username"), username);
