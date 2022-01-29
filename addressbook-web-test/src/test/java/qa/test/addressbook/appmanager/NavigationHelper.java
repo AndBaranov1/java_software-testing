@@ -20,8 +20,8 @@ public class NavigationHelper extends HelperBase {
 
   public void ContactPage() {
     if (isElementPresent(By.tagName("h1"))
-            && wd.findElement(By.tagName("h1")).getText().equals("Edit")
-            && isElementPresent(By.name("new"))) {
+            && wd.findElement(By.tagName("h1")).getText().equals("add new") //Edit
+            && isElementPresent(By.name("add new"))) { //new
       return;
     }
   }
