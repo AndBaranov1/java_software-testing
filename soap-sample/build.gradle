@@ -7,6 +7,7 @@ repositories {
 dependencies {
     implementation 'org.testng:testng:7.4.0'
     implementation 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
+    implementation 'com.jayway.restassured:rest-assured:2.9.0'
 }
 
 buildscript {
