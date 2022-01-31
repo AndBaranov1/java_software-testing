@@ -8,6 +8,8 @@ dependencies {
     implementation 'org.testng:testng:7.4.0'
     implementation 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
     implementation 'com.jayway.restassured:rest-assured:2.9.0'
+    implementation 'com.sun.xml.ws:rt:2.3.1'
+    implementation 'org.glassfish.jaxb:txw2:2.4.0-b180830.0438'
 }
 
 buildscript {
@@ -16,6 +18,9 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        classpath 'javax.xml.bind:jaxb-api:2.3.1'
+        classpath 'javax.xml.ws:jaxws-api:2.3.1'
+        classpath 'org.glassfish.main.javaee-api:javax.jws:3.1.2.2'
         classpath 'no.nils:wsdl2java:0.9'
     }
 }
@@ -27,4 +32,7 @@ wsdl2java {
     wsdlsToGenerate = [   //  2d-array of wsdls and cxf-parameters
                           ['src/main/resources/ipservice.wsdl']
     ]
+}
+test {
+    useTestNG()
 }
