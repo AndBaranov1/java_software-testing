@@ -1,6 +1,5 @@
 package qa.test.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import qa.test.addressbook.model.ContactData;
