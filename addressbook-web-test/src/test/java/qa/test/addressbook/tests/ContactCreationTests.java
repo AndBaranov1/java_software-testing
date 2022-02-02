@@ -57,7 +57,7 @@ public class ContactCreationTests extends TestBase {
       return contacts.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
     }
   }
-
+/*
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.db().groups().size() == 0) {
@@ -66,13 +66,13 @@ public class ContactCreationTests extends TestBase {
     }
   }
 
+ */
+
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) {
-    Groups groups = app.db().groups();
     app.goTo().homePage();
-    app.goTo().ContactPage();
     Contacts before = app.db().contacts();
-    app.contact().create(contact.inGroup(groups.iterator().next()));
+    app.contact().create(contact);
    // ContactData contact = new ContactData().withMiddlename("Jero").withLastname("TestJons")
            // .withNickname("TestYTesting").withTitle("GameTestingPro").withCompany("Test").withAddress("Jon").withFname("Jon")
          //   .withEmail("1testemail@mail.ru").withAddress("test_address").withPhoneHome("1111").withPhoneMobile("799955522")
@@ -80,17 +80,11 @@ public class ContactCreationTests extends TestBase {
     //app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
-    //Assert.assertEquals(after.size(), before.size() + 1);
-    //contact.withId(app.contact().findMaxId());
-/*
-    contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
-    assertThat(after.size(), equalTo(before.size() + 1));
-
- */
     assertThat(after, equalTo
             (before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     verifyContactListInUI();
   }
+
   @Test
   public void testContactInGroups(){
     Groups groups = app.db().groups();

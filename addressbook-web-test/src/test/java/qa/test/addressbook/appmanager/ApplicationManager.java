@@ -51,6 +51,10 @@ public class ApplicationManager {
     sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
   }
 
+  public void homePage() {
+    wd.findElement(By.linkText("home page")).click();
+  }
+
   public void logoutGroupPage() {
     wd.findElement(By.linkText("Logout")).click();
     wd.findElement(By.name("user")).clear();

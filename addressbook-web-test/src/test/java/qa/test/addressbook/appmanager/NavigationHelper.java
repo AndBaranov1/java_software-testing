@@ -10,18 +10,22 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void groupPage() {
+    /*
     if (isElementPresent(By.tagName("h1"))
             && wd.findElement(By.tagName("h1")).getText().equals("Groups")
             && isElementPresent(By.name("new"))) {
       return;
     }
     click(By.linkText("groups"));
+
+     */
+    click(By.linkText("groups"));
   }
 
   public void ContactPage() {
     if (isElementPresent(By.tagName("h1"))
-            && wd.findElement(By.tagName("h1")).getText().equals("add new") //Edit
-            && isElementPresent(By.name("add new"))) { //new
+            && wd.findElement(By.tagName("h1")).getText().equals("add new")
+            && isElementPresent(By.name("add new"))) {
       return;
     }
   }

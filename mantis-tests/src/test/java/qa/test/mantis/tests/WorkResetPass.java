@@ -21,7 +21,7 @@ public class WorkResetPass extends TestBase {
   @Test
   public void testResetPass() throws IOException, MessagingException {
     long now = System.currentTimeMillis();
-    app.registration().userEnter(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"));
+    app.registration().userEnter(app.getProperty("administrator"), app.getProperty("root"));
     String resUser = app.getProperty("g.User");
     app.registration().goToUserPage(resUser);
     app.registration().ResetPassword(resUser);

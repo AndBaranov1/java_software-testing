@@ -10,34 +10,40 @@ import qa.test.addressbook.model.Groups;
 import java.util.Collection;
 import java.util.HashSet;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsEqual.equalTo;
-
 public class ContactsInGroups extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.db().contacts().size() == 0) {
-      app.goTo().homePage();
-      ContactData contact = new ContactData().withMiddlename("middlename").withFname("fname").withLastname("lastname");
-      app.contact().create(contact);
-    } else  if (app.db().groups().size() == 0) {
+    if (app.db().groups().size() == 0) {
       app.goTo().groupPage();
-      app.group().create(new GroupData().withName("Test_1"));
+      app.group().create(new GroupData().withName("test1"));
     }
-
+    if (app.db().contacts().size() == 0) {
+      app.goTo().ContactMDPage();
+      app.contact().create(new ContactData()
+              .withMiddlename("Jero")
+              .withLastname("TestJons")
+              .withFname("Jon")
+              .withNickname("TestYTesting").withTitle("GameTestingPro").withCompany("Test").withAddress("Jon"));
+    }
   }
 
   @Test
   public void testContactInGroups() {
-    app.goTo().homePage();
-    ContactData contact = selectedContact();
-    Groups before = contact.getGroups();
-    GroupData groupForAdd = selectedGroup(contact);
-    app.contact().addContactInGroup(contact, groupForAdd);
-    Groups after = app.db().getContactFromDb(contact.getId()).getGroups();
-    assertThat(after, equalTo(before.withAdded(groupForAdd)));
+    Contacts before = app.db().contacts();
+    Groups groups = app.db().groups();
+    ContactData modifyedContact = selectedContact();
+    app.contact().ContactInGroup(modifyedContact.inGroup(groups.iterator().next()));
+    Contacts after = app.db().contacts();
 
+    int max = 0;
+    for (ContactData c : after) {
+      if (c.getId() > max) {
+        max = c.getId();
+      }
+    }
+    modifyedContact.setId(max);
+    before.add(modifyedContact);
   }
 
   public ContactData selectedContact() {
@@ -46,11 +52,23 @@ public class ContactsInGroups extends TestBase {
     for (ContactData contact : contacts) {
       if (contact.getGroups().size() < groups.size()) {
         return contact;
+      } else if (contact.getGroups().size() > groups.size()) {
+        Contacts contacts2 = app.db().contacts();
+        for (ContactData contact2 : contacts2) {
+          selectedContact();
+          ContactData modifyedContact = selectedContact();
+          app.contact().ContactInGroup(modifyedContact.inGroup(groups.iterator().next()));
+          return contact2;
+        }
+      } else if ((contact.getGroups().size() == groups.size())) {
+        app.goTo().groupPage();
+        app.group().create(new GroupData().withName("test_group1").withHeader("test1").withFooter("test comment"));
+        app.goTo().ContactMDPage();
+        selectedContact();
+        ContactData modifyedContact = selectedContact();
+        app.contact().ContactInGroup(modifyedContact.inGroup(groups.iterator().next()));
       }
     }
-    app.goTo().groupPage();
-    app.group().create(new GroupData().withName("test1"));
-    app.goTo().homePage();
     return contacts.iterator().next();
   }
 

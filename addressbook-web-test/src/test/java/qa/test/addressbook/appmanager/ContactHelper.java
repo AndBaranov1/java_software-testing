@@ -178,7 +178,7 @@ public class ContactHelper extends HelperBase {
   public void ContactInGroup(ContactData contact) {
     initContactCheckbox(contact.getId());
     contactCache = null;
-    homePage();
+    returnToContactPage();
   }
   public void initContactCheckbox(int id) {
     wd.findElement(By.xpath("//input[@id="+ id +"]")).click();
@@ -188,6 +188,12 @@ public class ContactHelper extends HelperBase {
     ContactDeletedGroup(group);
     selectContactById(contact.getId());
     initContactDelete();
+  }
+  public void returnToContactPage() {
+    if (isElementPresent(By.id("maintable"))) {
+      return;
+    }
+    click(By.linkText("home"));
   }
 
   public void addContactInGroup(ContactData contact, GroupData group) {
