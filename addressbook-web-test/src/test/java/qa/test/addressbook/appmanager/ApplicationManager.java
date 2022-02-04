@@ -91,4 +91,8 @@ public class ApplicationManager {
   public void gotoContactPage() {
     navigationHelper.ContactPage();
   }
+
+  public byte[] takeScreenshot(){
+    return  ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
+  }
 }
