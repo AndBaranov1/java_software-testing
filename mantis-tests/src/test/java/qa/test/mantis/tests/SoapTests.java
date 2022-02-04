@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class SoapTests extends TestBase {
 
-  @Test
+  @Test(enabled = true)
   public void testGetProjects() throws MalformedURLException, ServiceException, RemoteException {
     skipIfNotFixed(1);
     Set<Project> projects = app.soap().getProjects();
