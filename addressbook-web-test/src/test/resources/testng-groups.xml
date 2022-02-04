@@ -5,7 +5,7 @@
         <classes>
             <!----><class name="qa.test.addressbook.tests.GroupCreationTests"/>
             <class name="qa.test.addressbook.tests.GroupModificationTests" />
-            <!----><class name="qa.test.addressbook.tests.GroupDeletionTests" />
+            <!----><class name="qa.test.addressbook.tests.GroupDeletionTests"/>
         </classes>
     </test>
 </suite>
