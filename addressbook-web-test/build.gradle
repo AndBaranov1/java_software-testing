@@ -19,7 +19,7 @@ dependencies {
 
 }
 task testGroups(type: Test) {
-    useTestNG{
+    useTestNG {
         suites 'src/test/resources/testng-groups.xml'
     }
     if (project.hasProperty('browser')) {
@@ -31,7 +31,6 @@ task testGroups(type: Test) {
     if (project.hasProperty('groupsVerifyUI')) {
         systemProperty 'groupsVerifyUI', "${groupsVerifyUI}"
     }
-
 }
 
 task testContacts(type: Test) {
@@ -49,3 +48,4 @@ task testContacts(type: Test) {
     }
 
 }
+
