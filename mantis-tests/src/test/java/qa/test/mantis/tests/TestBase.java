@@ -39,13 +39,13 @@ public class TestBase {
   }
 
   public boolean isIssueOpen(int issueId) throws RemoteException, ServiceException, MalformedURLException {
-    MantisConnectPortType mc = SoapHelper.getMantisConnect();
-    IssueData issueStatusById = mc.mc_issue_get("administrator", "root", BigInteger.valueOf(issueId));
-    String issueStatus = app.soap().getIssueStatus(issueId);
-    if ((STATUS_RESOLVED.equals(issueStatusById.getStatus().getName())) || (STATUS_CLOSED.equals(issueStatusById.getStatus().getName()))) {
+    if ((app.soap().getIssueStatus(issueId).equals("closed"))||(app.soap()
+            .getIssueStatus(issueId).equals("resolved"))){
       return false;
     }
-    return true;
+    else {
+      return true;
+    }
   }
 
   public void skipIfNotFixed(int issueId) throws RemoteException, ServiceException, MalformedURLException {
