@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
 
@@ -45,6 +46,10 @@ public class HelperBase {
     } catch (NoSuchElementException ex) {
       return false;
     }
+  }
+
+  protected void select(By locator, String value) {
+    new Select(wd.findElement(locator)).selectByVisibleText(value);
   }
 
   public boolean isAlertPresent() {

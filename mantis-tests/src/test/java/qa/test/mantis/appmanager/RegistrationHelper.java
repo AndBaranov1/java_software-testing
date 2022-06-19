@@ -20,10 +20,12 @@ public class RegistrationHelper extends HelperBase {
     wd.get(confirmationLink);
     type(By.name("password"), password);
     type(By.name("password_confirm"), password);
-    click(By.cssSelector("input[value='Изменить учетную запись']"));
+    click(By.cssSelector("button[type='submit']"));
   }
 
-  public void userEnter(String username, String password) {
+
+
+  /*public void userEnter(String username, String password) {
     wd.get(app.getProperty("web.baseUrl") + "/login_page.php");
     type(By.name("username"), username);
     type(By.name("password"), password);
@@ -41,5 +43,5 @@ public class RegistrationHelper extends HelperBase {
     wd.get(app.getProperty("web.baseUrl") + "/manage_user_page.php");
     click(By.linkText(username));
     click(By.cssSelector("input[value='Сбросить пароль']"));
-  }
+  }*/
 }

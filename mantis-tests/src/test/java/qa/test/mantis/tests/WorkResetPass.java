@@ -1,3 +1,4 @@
+/*
 package qa.test.mantis.tests;
 
 import org.testng.annotations.AfterMethod;
@@ -43,3 +44,4 @@ public class WorkResetPass extends TestBase {
     app.mail().stop();
   }
 }
+*/

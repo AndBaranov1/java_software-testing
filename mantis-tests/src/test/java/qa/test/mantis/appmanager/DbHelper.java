@@ -5,35 +5,27 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-
+import qa.test.mantis.model.Users;
+import qa.test.mantis.model.UsersData;
 
 import java.util.List;
 
 public class DbHelper {
-/*
-  private final SessionFactory sessionFactory;
-  private ApplicationManager app;
+    private final SessionFactory sessionFactory;
 
-  public DbHelper(ApplicationManager app) {
-    // A SessionFactory is set up once for an application!
-    final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-            .configure() // configures settings from hibernate.cfg.xml
-            .build();
-    sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-    this.app = app;
-  }
-
-  public Users users() {
-    Session session = sessionFactory.openSession();
-    session.beginTransaction();
-    List<UserData> result = session.createQuery("from UserData where username !='administrator'").list();
-    for (UserData user : result) {
-      System.out.println(user);
+    public DbHelper() {
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure()
+                .build();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
     }
-    session.getTransaction().commit();
-    session.close();
-    return new Users(result);
-  }
 
- */
+    public Users usersWithoutAdmin() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<UsersData> result = session.createQuery( "from UsersData where id <> 1" ).list();
+        session.getTransaction().commit();
+        session.close();
+        return new Users(result);
+    }
 }
