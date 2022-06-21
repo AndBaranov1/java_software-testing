@@ -14,6 +14,7 @@ public class DbHelper {
     private final SessionFactory sessionFactory;
 
     public DbHelper() {
+       // this.app = app;
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure()
                 .build();
@@ -28,4 +29,6 @@ public class DbHelper {
         session.close();
         return new Users(result);
     }
+
+    
 }

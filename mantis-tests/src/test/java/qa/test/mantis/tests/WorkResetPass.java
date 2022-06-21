@@ -1,10 +1,12 @@
-/*
 package qa.test.mantis.tests;
 
+import biz.futureware.mantis.rpc.soap.client.UserData;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import qa.test.mantis.model.MailMessage;
+import qa.test.mantis.model.Users;
+import qa.test.mantis.model.UsersData;
 import ru.lanwen.verbalregex.VerbalExpression;
 
 import javax.mail.MessagingException;
@@ -15,33 +17,33 @@ import static org.testng.AssertJUnit.assertTrue;
 
 public class WorkResetPass extends TestBase {
 
-  @BeforeMethod
-  public void startMailServer() {
-    app.mail().start();
-  }
-  @Test
-  public void testResetPass() throws IOException, MessagingException {
-    long now = System.currentTimeMillis();
-    app.registration().userEnter(app.getProperty("administrator"), app.getProperty("root"));
-    String resUser = app.getProperty("g.User");
-    app.registration().goToUserPage(resUser);
-    app.registration().ResetPassword(resUser);
-    String email = String.format(app.getProperty("g.Email"), now);
-    List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
-    String confirmationLink = findConfirmationLink(mailMessages, email);
-    String password = app.getProperty("g.Password");
-    app.registration().finish(confirmationLink, password);
-    app.registration().userEnter(resUser, password);
-    assertTrue(app.newSession().login(resUser, password));
-  }
-  private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
-    MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
-    VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
-    return regex.getText(mailMessage.text);
-  }
-  @AfterMethod(alwaysRun = true)
-  public void stopMailServer() {
-    app.mail().stop();
-  }
+
+    @BeforeMethod
+    public void startMailServer (){
+        app.mail().start();
+    }
+
+    @Test
+    public void changePasswordTest () throws IOException, MessagingException {
+        Users users = app.db().usersWithoutAdmin();
+        UsersData user = users.iterator().next();
+        String userName = user.getUserName();
+        String email = user.getEmail();
+        String newPassword = "password";
+        app.session().login(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"));
+        app.goTo().managePage();
+        app.goTo().usersManageTab();
+        app.user().selectUser(user.getId());
+        app.user().passwordReset();
+        List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
+        String confirmationLink = app.mail().findConfirmationLink(mailMessages, email);
+        long now = System.currentTimeMillis();
+        String realname = String.format("realname%s", now);
+        app.registration().finishChangingPassword(realname, confirmationLink, newPassword);
+        assertTrue(app.newSession().login(userName, newPassword));
+    }
+    @AfterMethod(alwaysRun = true)
+    public void stopMailServer() {
+        app.mail().stop();
+    }
 }
-*/
