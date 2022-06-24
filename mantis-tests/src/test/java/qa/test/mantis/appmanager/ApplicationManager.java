@@ -109,7 +109,10 @@ public class ApplicationManager {
     return soapHelper;
   }
 
-  public DbHelper db() {
+  public DbHelper db(){
+    if (dbHelper == null){
+      dbHelper = new DbHelper(this);
+    }
     return dbHelper;
   }
 
