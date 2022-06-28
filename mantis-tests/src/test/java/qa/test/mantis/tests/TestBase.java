@@ -33,11 +33,6 @@ public class TestBase {
     app.ftp().upload(new File("src/test/resources/config_inc.php"), "config_inc.php","config_inc.php.bak");
   }
 
-  @AfterSuite(alwaysRun = true)
-  public void tearDown() throws IOException {
-    app.ftp().restore("config_inc.php.bak", "config_inc.php");
-    app.stop();
-  }
 
   public boolean isIssueOpen(int issueId) throws RemoteException, ServiceException, MalformedURLException {
     if ((app.soap().getIssueStatus(issueId).equals("closed"))||(app.soap()
@@ -53,5 +48,11 @@ public class TestBase {
     if (isIssueOpen(issueId)) {
       throw new SkipException("Ignored because of issue " + issueId);
     }
+  }
+
+  @AfterSuite(alwaysRun = true)
+  public void tearDown() throws IOException {
+    app.ftp().restore("config_inc.php.bak", "config_inc.php");
+    app.stop();
   }
 }

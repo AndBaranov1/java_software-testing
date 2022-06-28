@@ -34,8 +34,6 @@ public class HttpSession {
     post.setEntity(new UrlEncodedFormEntity(params));
     CloseableHttpResponse response = httpClient.execute(post);
     String body = geTextFrom(response);
-    //return body.contains(String.format("<span class=\"italic\">%s</span>", username));
-    //return body.contains(String.format("/"+app.getProperty("vMantis")+"/account_page.php\">%s</a>", username));
     return body.contains(String.format("<span class=\"user-info\">%s</span>", username));
   }
 
@@ -51,8 +49,7 @@ public class HttpSession {
     HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
     CloseableHttpResponse response = httpClient.execute(get);
     String body = geTextFrom(response);
-    //return body.contains(String.format("<span class=\"italic\">%s</span>", username));
-    //return body.contains(String.format("/mantisbt-2.25.2/account_page.php\">%s</a>", username));
     return body.contains(String.format("<span class=\"user-info\">%s</span>", username));
+
   }
 }

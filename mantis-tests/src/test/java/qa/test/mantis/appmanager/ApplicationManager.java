@@ -135,14 +135,4 @@ public class ApplicationManager {
     }
     return user;
   }
-
-/*
-  public DbHelper db() {
-    if (dbHelper == null) {
-      dbHelper = new DbHelper(this);
-    }
-    return dbHelper;
-  }
-
- */
 }
